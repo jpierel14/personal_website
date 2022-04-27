@@ -1,0 +1,36 @@
+{#  -*- coding: utf-8 -*- #}
+{% import 'game_helper.tmpl' as helper with context %}
+{% import 'comments_helper.tmpl' as comments with context %}
+{% extends 'base.tmpl' %}
+{% block extra_head %}
+<link href="/assets/css/game_theme.css" rel="stylesheet" type="text/css">
+{% if post.meta('keywords') %}
+    <meta name="keywords" content="{{ post.meta('keywords')|e }}">
+{% endif %}
+    <meta name="author" content="{{ post.author()|e }}">
+    {% if post.prev_post %}
+        <link rel="prev" href="{{ post.prev_post.permalink() }}" title="{{ post.prev_post.title()|e }}" type="text/html">
+    {% endif %}
+    {% if post.next_post %}
+        <link rel="next" href="{{ post.next_post.permalink() }}" title="{{ post.next_post.title()|e }}" type="text/html">
+    {% endif %}
+    {% if post.is_draft %}
+        <meta name="robots" content="noindex">
+    {% endif %}
+    {{ helper.open_graph_metadata(post) }}
+    {{ helper.twitter_card_information(post) }}
+{% endblock %}
+
+{% block content %}
+    <article class="post-{{ post.meta('type') }}">
+    <div class="e-content" itemprop="articleBody text">
+    {{ post.text() }}
+    </div>
+    {% if post.description() %}
+        <meta content="{{ post.description() }}" itemprop="description">
+    {% endif %}
+    </div>
+    {{ helper.html_pager(post) }}
+    {{ helper.mathjax_script(post) }}
+    </article>
+{% endblock %}

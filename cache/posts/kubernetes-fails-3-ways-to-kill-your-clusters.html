@@ -1,0 +1,91 @@
+<img alt="../galleries/kubernetes-logo-fire.png" class="left" src="../galleries/kubernetes-logo-fire.png" />
+<p>Kubernetes has its virtues and <a class="reference external" href="https://srcco.de/posts/why-kubernetes.html">is worth investing
+in</a>, but it is
+undoubtedly complex and comes with many operational challenges.
+We faced many of them on our journey towards &quot;cloud native&quot; at Zalando.</p>
+<!-- TEASER_END -->
+<p>We constantly learned from other organizations that shared their failures
+and insights, so I <a class="reference external" href="https://srcco.de/posts/kubernetes-failure-stories.html">started to compile a list of public failure/horror
+stories related to
+Kubernetes</a>.
+The goal was to make it easier for people tasked with operations to find
+outage reports to learn from.</p>
+<p>Many of these failures had a few things in common. Here are the factors
+that contributed to failure.</p>
+<section id="missing-operational-maturity">
+<h1>Missing Operational Maturity</h1>
+<p>Infrastructure operations is a challenge for most organizations and the
+transformation towards end-to-end responsibility (&quot;DevOps&quot;, &quot;you build
+it, you run it&quot;) is often in full swing. Smaller organizations usually
+use a tool to bootstrap a cluster (e.g.
+<a class="reference external" href="https://github.com/kubernetes/kops">kops</a>), but do not dedicate
+time to set up full continuous delivery for the infrastructure. This
+leads to painful manual Kubernetes upgrades, untested infrastructure
+changes, and brittle clusters. The same situation applies to managed
+infrastructure, as cloud offerings never come with all batteries
+included. Infrastructure changes should get at least the same attention
+and rigor as your customer-facing app deployments. <a class="footnote-reference brackets" href="#footnote-1" id="footnote-reference-1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+</section>
+<section id="upstream-kubernetes-docker-issues">
+<h1>Upstream Kubernetes/Docker issues</h1>
+<p>Some of the failures can be attributed to upstream issues, e.g. Docker
+daemon hanging, issues with <a class="reference external" href="https://github.com/kubernetes/kubernetes/issues/48638">kubelet not reconnecting to the control
+plane</a>,
+<a class="reference external" href="https://github.com/kubernetes/kubernetes/issues/67577">Kernel CPU throttling
+bugs</a>, unsafe
+CronJob defaults, and <a class="reference external" href="https://github.com/kubernetes/kubernetes/issues/73587">kubelet memory
+leaks</a>.</p>
+<p>If you hit an upstream issue—congratulations! You can follow or file an
+upstream issue and hope or contribute a fix helping many others. I would
+expect this class of failure causes to get smaller over time as CNCF
+projects mature and the user base grows, making it less probable that
+you will be the first to hit an upstream issue.</p>
+</section>
+<section id="cloud-organization-integrations">
+<h1>Cloud/organization Integrations</h1>
+<p>Kubernetes comes in more than one flavor: There are many possible
+combinations of Kubernetes components and configurations. Kubernetes
+needs to interact with your cloud platform, such as Google Cloud or AWS,
+and your existing IT landscape. And all of these integrations can lead
+to failure scenarios.</p>
+<p>We saw Kubernetes' AWS cloud provider code easily hit AWS API rate
+limits and have problems with EBS persistent volume attachments. Using
+the AWS ELB with dynamic IPs caused problems with kubelet losing
+connections. The <a class="reference external" href="https://docs.google.com/document/d/1rn-v2TNH9k4Oz-VuaueP77ANE5p-5Ua89obK2JaArfg/edit">AWS IAM integration
+(kube2iam)</a>
+is notoriously prone to race conditions.</p>
+</section>
+<section id="human-error">
+<h1>Human Error</h1>
+<p>Let us be clear: There is <a class="reference external" href="https://www.youtube.com/watch?v=ZXXaCCbpNYw">no such thing as &quot;human error&quot; as a root
+cause</a>. If your Root
+Case Analysis (RCA) concludes with &quot;human error&quot;, start over and ask
+some hard questions.</p>
+</section>
+<section id="share-your-learnings">
+<h1>Share your learnings</h1>
+<p>Nowadays everybody is talking about &quot;failure culture,&quot; but what
+organization is truly ready to share its failures and learnings
+publicly? Kubernetes gives us a common ground where we can all benefit
+from sharing our experiences and learnings from each other.</p>
+<p>Many contributing factors are not new, such as the maturity in
+infrastructure changes, Docker, distributed systems, and so on. But
+Kubernetes gives us a common language to talk through and address them.
+By reducing the unknown unknowns of operating or using Kubernetes
+through shared experiences, it will get easier for everyone over time.</p>
+<p>Thanks to <a class="reference external" href="https://twitter.com/jbeda">Joe Beda</a>, the list of Kubernetes failure stories is now available on its own domain:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://k8s.af">https://k8s.af</a></p></li>
+</ul>
+<p>Do you have experiences to share? <a class="reference external" href="https://github.com/hjacobs/kubernetes-failure-stories/edit/master/README.md">Open a Pull Request</a>!</p>
+<p>For more on
+Kubernetes failures, come to my talk, “<a class="reference external" href="https://sched.co/MPcM">Kubernetes Failure Stories
+and How to Crash Your Clusters</a>” at KubeCon
++ CloudNativeCon Europe 2019 in Barcelona on May 20-23.</p>
+<aside class="footnote brackets" id="footnote-1" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#footnote-reference-1">1</a><span class="fn-bracket">]</span></span>
+<p>To learn how we roll out changes to our Kubernetes infrastructure at Zalando, <a class="reference external" href="https://www.youtube.com/watch?v=1xHmCrd8Qn8">watch the KubeCon 2018 talk &quot;Continuously Deliver your Kubernetes Infrastructure&quot;</a></p>
+</aside>
+<hr class="docutils" />
+<p>This blog post was <a class="reference external" href="https://techbeacon.com/enterprise-it/kubernetes-fails-3-ways-kill-your-clusters">originally published on TechBeacon</a>.</p>
+</section>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+ <sitemap>
+  <loc>http://www.justinpierel.com/categories/simple-games.xml</loc>
+  <lastmod>2022-04-01T20:19:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>http://www.justinpierel.com/galleries/demo/rss.xml</loc>
+  <lastmod>2022-04-04T21:17:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>http://www.justinpierel.com/galleries/rss.xml</loc>
+  <lastmod>2022-04-04T21:17:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>http://www.justinpierel.com/rss.xml</loc>
+  <lastmod>2022-04-01T20:19:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>http://www.justinpierel.com/sitemap.xml</loc>
+  <lastmod>2022-04-04T23:08:00Z</lastmod>
+ </sitemap>
+</sitemapindex>
